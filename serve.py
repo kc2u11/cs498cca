@@ -1,20 +1,21 @@
 from flask import Flask, request
 import subprocess
-import socket 
+import socket
 
 app = Flask(__name__)
 seed_value = 0
 
 @app.route('/', methods=['GET'])
 def get_seed():
+    print("In GET")
     return str(socket.gethostname())
 
 @app.route('/', methods=['POST'])
 def run_stress_program():
-    
+
     print('Processing python file')
     # Create a separate process
-    http_server_process = subprocess.Popen(['python', 'stress_cpu.py'])
+    http_server_process = subprocess.Popen(['python3', 'stress_cpu.py'])
     print('Done triggering  python file')
 
     return str('Completed POST')
